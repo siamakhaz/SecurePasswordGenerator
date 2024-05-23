@@ -12,20 +12,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14.x'
-
-    - name: Install PowerShell
-      run: |
-        npm install -g pwsh
-        pwsh --version
-
     - name: Install PowerShellGet
       run: |
-        pwsh -Command "Install-Module -Name PowerShellGet -Force -SkipPublisherCheck"
-        pwsh -Command "Import-Module PowerShellGet"
+        Install-Module -Name PowerShellGet -Force -SkipPublisherCheck
+        Import-Module PowerShellGet
+      shell: pwsh
 
     - name: Authenticate to PowerShell Gallery
       run: |
