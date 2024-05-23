@@ -59,7 +59,7 @@ After importing the module, you can use the `New-SecurePassword` function to gen
 
 ## License
 
-This module is licensed under the [Your License]. See the LICENSE file for more details.
+This module is licensed under the MIT. See the LICENSE file for more details.
 
 ## Contributions
 
