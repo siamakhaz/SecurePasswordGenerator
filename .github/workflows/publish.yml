@@ -3,6 +3,9 @@ name: Publish PowerShell Module
 on:
   release:
     types: [published]
+  push:
+    branches:
+      - main
 
 jobs:
   publish:
@@ -21,7 +24,7 @@ jobs:
     - name: Authenticate to PowerShell Gallery
       run: |
         $Password = ConvertTo-SecureString -String ${{ secrets.PSGalleryApiKey }} -AsPlainText -Force
-        $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList 'YourGalleryUsername', $Password
+        $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList 'siamakhaz', $Password
         Set-PSRepository -Name 'PSGallery' -Credential $Credential
       shell: pwsh
 
