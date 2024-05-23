@@ -1,0 +1,37 @@
+name: Publish PowerShell Module
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install PowerShell
+      uses: actions/setup-powershell@v2
+      with:
+        pwsh-version: '7.x'
+
+    - name: Install PowerShellGet
+      run: |
+        Install-Module -Name PowerShellGet -Force -SkipPublisherCheck
+        Import-Module PowerShellGet
+
+    - name: Authenticate to PowerShell Gallery
+      run: |
+        $Password = ConvertTo-SecureString -String ${{ secrets.PSGalleryApiKey }} -AsPlainText -Force
+        $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList 'YourGalleryUsername', $Password
+        Set-PSRepository -Name 'PSGallery' -Credential $Credential
+
+    - name: Publish Module
+      run: |
+        Publish-Module -Path . -NuGetApiKey ${{ secrets.PSGalleryApiKey }} -Verbose
+
+    - name: Verify Module
+      run: |
+        Find-Module -Name SecurePasswordGenerator

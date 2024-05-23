@@ -3,7 +3,7 @@
     RootModule = 'SecurePasswordGenerator.psm1'
     
     # Version number of this module.
-    ModuleVersion = '1.0.0'
+    ModuleVersion = '1.0.1'
     
     # ID used to uniquely identify this module
     GUID = 'e7e5d9ae-473b-4147-b8a4-61a29b7267f3'
